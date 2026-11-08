@@ -1,0 +1,307 @@
+/* Distinctive 8-Card Portrait Fandeck (Logo + Title + Role) + 2-Row Pill Marquee */
+.tech-showcase-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 16px;
+}
+
+/* 1. Top Part: 8-Card Portrait Fandeck */
+.tech-fandeck-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 24px 64px;
+}
+
+/* Soft ambient shadow behind the white cards so they pop against the white canvas */
+.tech-fandeck-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 52% 44% at 50% 54%,
+    rgba(15, 23, 42, 0.085) 0%,
+    rgba(15, 23, 42, 0.035) 50%,
+    transparent 78%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tech-fandeck {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fandeck-card {
+  position: relative;
+  width: 132px;
+  height: 158px;
+  padding: 22px 12px 18px;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow:
+    0 20px 38px -10px rgba(15, 23, 42, 0.09),
+    0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  margin-left: -16px;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease;
+}
+
+.fandeck-card:first-child {
+  margin-left: 0;
+}
+
+/* 8-Card Symmetrical Fan Arc Positions & Overlapping Order */
+.fandeck-card-0 { transform: translateY(20px) rotate(-10.5deg); z-index: 1; }
+.fandeck-card-1 { transform: translateY(10px) rotate(-7.5deg); z-index: 2; }
+.fandeck-card-2 { transform: translateY(4px) rotate(-4.5deg); z-index: 3; }
+.fandeck-card-3 { transform: translateY(0px) rotate(-1.5deg); z-index: 4; }
+.fandeck-card-4 { transform: translateY(0px) rotate(1.5deg); z-index: 5; }
+.fandeck-card-5 { transform: translateY(4px) rotate(4.5deg); z-index: 6; }
+.fandeck-card-6 { transform: translateY(10px) rotate(7.5deg); z-index: 7; }
+.fandeck-card-7 { transform: translateY(20px) rotate(10.5deg); z-index: 8; }
+
+.fandeck-card:hover,
+.fandeck-card:focus-visible {
+  transform: translateY(-16px) scale(1.07) rotate(0deg);
+  z-index: 20;
+  border-color: rgba(15, 23, 42, 0.16);
+  box-shadow:
+    0 28px 50px -12px rgba(15, 23, 42, 0.16),
+    0 8px 20px -4px rgba(15, 23, 42, 0.06);
+}
+
+.fandeck-card:focus-visible {
+  outline: 2px solid #09090b;
+  outline-offset: 2px;
+}
+
+.fandeck-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fandeck-icon-wrap svg {
+  width: 48px !important;
+  height: 48px !important;
+  display: block;
+}
+
+.fandeck-card:hover .fandeck-icon-wrap {
+  transform: scale(1.08);
+}
+
+.fandeck-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+}
+
+.fandeck-title {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: #09090b;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.fandeck-role {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748b;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* 2. Bottom Part: 2-Row Infinite Pill Marquee */
+.capability-marquee {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  overflow: hidden;
+  padding-block: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Left & Right White Fade Masks */
+.capability-marquee::before,
+.capability-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(48px, 10vw, 130px);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.capability-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff 12%, rgba(255, 255, 255, 0) 100%);
+}
+
+.capability-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff 12%, rgba(255, 255, 255, 0) 100%);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 16px;
+  padding-right: 16px;
+  animation: scroll-left 36s linear infinite;
+}
+
+.marquee-reverse {
+  animation: scroll-right 40s linear infinite;
+}
+
+.capability-marquee:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+.marquee-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px 8px 10px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow:
+    0 4px 14px -2px rgba(15, 23, 42, 0.05),
+    0 1px 3px rgba(15, 23, 42, 0.03);
+  white-space: nowrap;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  cursor: default;
+}
+
+.marquee-pill:hover {
+  transform: translateY(-2px);
+  border-color: rgba(15, 23, 42, 0.14);
+  box-shadow:
+    0 8px 20px -4px rgba(15, 23, 42, 0.09),
+    0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.pill-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  flex-shrink: 0;
+}
+
+.pill-logo svg {
+  width: 16px !important;
+  height: 16px !important;
+  display: block;
+}
+
+.pill-text {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: #09090b;
+  letter-spacing: -0.01em;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 980px) {
+  .fandeck-card {
+    width: 112px;
+    height: 138px;
+    padding: 16px 8px 14px;
+    border-radius: 18px;
+    margin-left: -14px;
+  }
+  .fandeck-icon-wrap {
+    width: 44px;
+    height: 44px;
+  }
+  .fandeck-icon-wrap svg {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .fandeck-title {
+    font-size: 12.5px;
+  }
+  .fandeck-role {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 680px) {
+  .tech-fandeck-stage {
+    padding: 24px 12px 44px;
+  }
+  .tech-fandeck {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 440px;
+  }
+  .fandeck-card {
+    width: 100%;
+    height: 124px;
+    margin-left: 0 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content,
+  .marquee-reverse {
+    animation: none;
+  }
+}

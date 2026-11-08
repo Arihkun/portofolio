@@ -1,0 +1,351 @@
+/* rasmadibnu.com Style GitHub Activity Section */
+.github-section {
+  padding-block: 48px 80px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.github-header {
+  margin-bottom: 24px;
+}
+
+.github-header h2 {
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 700;
+  color: #09090b;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+}
+
+.github-subheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.github-total-text {
+  font-size: 16px;
+  color: #52525b;
+  margin: 0;
+}
+
+.github-view-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #09090b;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 160ms ease;
+}
+
+.github-view-link:focus-visible,
+.heatmap-learn-link:focus-visible {
+  outline: 2px solid #09090b;
+  outline-offset: 4px;
+}
+
+.github-arrow {
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+.github-view-link:hover .github-arrow {
+  transform: translateX(3px);
+}
+
+/* Single Rounded Heatmap Card */
+.activity-heatmap-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 2.8vw, 32px) clamp(18px, 3.2vw, 36px);
+  background: #fafafa;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Scroll Container - completely hide scrollbars on all browsers */
+.heatmap-scroll-container {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px 0;
+  width: 100%;
+  max-width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.heatmap-scroll-container::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.heatmap-grid-canvas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 780px;
+}
+
+/* Month Labels Track */
+.heatmap-months-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+}
+
+.heatmap-days-spacer {
+  width: 36px;
+  height: 18px;
+  flex-shrink: 0;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background: #fafafa;
+}
+
+.heatmap-months-track {
+  display: grid;
+  grid-template-columns: repeat(53, minmax(0, 1fr));
+  column-gap: 4px;
+  height: 18px;
+  flex: 1;
+}
+
+.heatmap-month-label {
+  font-size: 12.5px;
+  font-family: var(--sans);
+  color: #52525b;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Body: Weekday Labels + 53 Weeks */
+.heatmap-body-row {
+  display: flex;
+  gap: 6px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.heatmap-days-column {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  row-gap: 4px;
+  width: 36px;
+  padding-right: 4px;
+  flex-shrink: 0;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background: #fafafa;
+}
+
+.heatmap-day-label {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 1;
+  font-family: var(--sans);
+  color: #52525b;
+  text-align: left;
+}
+
+.heatmap-weeks-track {
+  display: grid;
+  grid-template-columns: repeat(53, minmax(0, 1fr));
+  column-gap: 4px;
+  flex: 1;
+}
+
+.heatmap-col {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  row-gap: 4px;
+}
+
+.heatmap-cell {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.heatmap-cell.empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.heatmap-cell.level-0 {
+  background: #ebedf0;
+  border: 1px solid rgba(27, 31, 35, 0.04);
+}
+
+.heatmap-cell.level-1 {
+  background: #9be9a8;
+}
+
+.heatmap-cell.level-2 {
+  background: #40c463;
+}
+
+.heatmap-cell.level-3 {
+  background: #30a14e;
+}
+
+.heatmap-cell.level-4 {
+  background: #216e39;
+}
+
+.heatmap-cell:hover,
+.heatmap-cell:focus-visible {
+  transform: scale(1.22);
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(33, 110, 57, 0.35);
+  outline: 1.5px solid #216e39;
+}
+
+/* Floating Tooltip */
+.heatmap-floating-tooltip {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  z-index: 60;
+  background: #09090b;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.2);
+  animation: tooltipIn 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #09090b;
+}
+
+@keyframes tooltipIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -90%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+  }
+}
+
+/* Heatmap Footer (No border line, matching rasmadibnu.com) */
+.heatmap-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.heatmap-learn-link {
+  font-size: 13.5px;
+  color: #64748b;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 150ms ease;
+}
+
+.heatmap-learn-link:hover {
+  color: #09090b;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13.5px;
+  color: #64748b;
+}
+
+.heatmap-legend > span:first-child {
+  margin-right: 3px;
+}
+
+.heatmap-legend > span:last-child {
+  margin-left: 3px;
+}
+
+.heatmap-legend .heatmap-cell {
+  width: 13px;
+  height: 13px;
+  aspect-ratio: auto;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.heatmap-legend .heatmap-cell:hover {
+  transform: none;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Mobile & Tablet Responsive Refinement */
+@media (max-width: 768px) {
+  .github-section {
+    padding-block: 36px 64px;
+  }
+
+  .activity-heatmap-card {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+
+  .heatmap-grid-canvas {
+    min-width: 740px;
+  }
+
+  .heatmap-months-track,
+  .heatmap-weeks-track {
+    column-gap: 3px;
+  }
+
+  .heatmap-days-column,
+  .heatmap-col {
+    row-gap: 3px;
+  }
+
+  .heatmap-footer {
+    margin-top: 16px;
+    font-size: 12.5px;
+  }
+
+  .heatmap-learn-link,
+  .heatmap-legend {
+    font-size: 12.5px;
+  }
+}

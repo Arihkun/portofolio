@@ -1,0 +1,385 @@
+.homepage {
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .text-animate-word {
+    display: inline-block;
+    white-space: pre;
+    will-change: transform, opacity, filter;
+    animation: blurInUp 660ms cubic-bezier(0.22, 1, 0.36, 1) var(--word-delay, 0s) both;
+  }
+
+  .blur-fade-in {
+    will-change: transform, opacity, filter;
+    animation: blurInUp 720ms cubic-bezier(0.22, 1, 0.36, 1) var(--fade-delay, 0.2s) both;
+  }
+}
+
+@media (min-width: 1001px) and (prefers-reduced-motion: no-preference) {
+  .homepage .showcase-decisions[data-reveal-state="visible"],
+  .homepage .showcase-kasmate[data-reveal-state="visible"] {
+    transition-delay: 110ms;
+  }
+}
+
+.home-hero {
+  position: relative;
+  z-index: 20;
+  isolation: isolate;
+  padding-block: clamp(64px, 8vw, 110px) 70px;
+  max-width: 1200px;
+}
+
+/* Subtle Top-Right Architectural Grid Pattern (rasmadibnu.com style) */
+.hero-grid-pattern-wrap {
+  pointer-events: none;
+  position: absolute;
+  top: -32px;
+  right: -24px;
+  z-index: -1;
+  width: min(64rem, 100vw);
+  height: 28rem;
+  color: #cbd5e1;
+  opacity: 0.72;
+  mask-image: radial-gradient(ellipse at top right, black 0%, black 26%, transparent 74%);
+  -webkit-mask-image: radial-gradient(ellipse at top right, black 0%, black 26%, transparent 74%);
+}
+
+.hero-grid-pattern-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-grid-squares {
+  overflow: visible;
+}
+
+.hero-grid-pulse-cell {
+  color: #09090b;
+  opacity: 0;
+  animation: gridSquarePulse var(--pulse-duration, 4.8s) ease-in-out var(--pulse-delay, 0s) infinite;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(36px, 5vw, 64px);
+  min-width: 0;
+}
+
+.hero-main {
+  position: relative;
+  z-index: 15;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #71717a;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.home-hero h1 {
+  font-size: clamp(38px, 4.2vw, 60px);
+  line-height: 1.12;
+  margin-bottom: 22px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.gradient-text {
+  color: #09090b;
+  font-weight: 600;
+}
+
+.hero-bio {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  max-width: 54ch;
+}
+
+.hero-bio strong {
+  color: var(--ink);
+}
+
+/* Hero Practice Overview Card - Clean Light System */
+.hero-practice-card {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.practice-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.practice-tag {
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+.practice-location {
+  color: #52525b;
+}
+
+.practice-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.practice-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  font-size: 13.5px;
+}
+
+.practice-label {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.practice-val {
+  color: #09090b;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.practice-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: #52525b;
+}
+
+.practice-status-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #09090b;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+/* Technology Stack Section */
+.tech-stack-section {
+  padding-block: 64px 48px;
+  width: 100%;
+  position: relative;
+}
+
+.tech-stack-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.tech-stack-header h2 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.tech-stack-header p {
+  font-size: clamp(14.5px, 1.5vw, 16.5px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 620px;
+  margin-inline: auto;
+  margin-bottom: 0;
+}
+
+/* Section labels & headings */
+.section-label {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #71717a;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.work-section {
+  padding-bottom: 60px;
+}
+
+.work-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 36px;
+}
+
+.work-heading h2 {
+  font-size: clamp(28px, 3.2vw, 40px);
+  margin: 0;
+}
+
+.work-heading > p {
+  max-width: 420px;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+/* Profile section (2-Column Editorial Layout without Photo) */
+.home-profile {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: flex-start;
+  gap: clamp(32px, 6vw, 80px);
+  padding-block: 88px;
+  border-top: 1px solid var(--line);
+}
+
+.profile-heading h2 {
+  font-size: clamp(30px, 3.4vw, 44px);
+  margin-bottom: 0;
+}
+
+.profile-copy p {
+  max-width: 60ch;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.profile-copy .text-link {
+  margin-top: 8px;
+}
+
+.home-library {
+  padding-block: 60px 90px;
+  border-top: 1px solid var(--line);
+}
+
+/* Contact card banner */
+.home-contact {
+  padding-block: 40px 110px;
+}
+
+.contact-card {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  padding: clamp(36px, 6vw, 64px);
+}
+
+.contact-card h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  margin-bottom: 16px;
+}
+
+.contact-card p {
+  font-size: 18px;
+  max-width: 52ch;
+  margin-bottom: 32px;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 1000px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-terminal-wrapper {
+    max-width: 520px;
+  }
+  .home-hero {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 650px) {
+  .home-hero {
+    padding-block: 40px 48px;
+  }
+  .hero-status {
+    font-size: 12px;
+    padding: 5px 12px;
+  }
+  .hero-bio {
+    font-size: 16px;
+  }
+  .terminal-kpis {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px;
+  }
+  .terminal-body {
+    padding: 14px;
+  }
+  .terminal-cmd {
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+  .terminal-footer-status {
+    font-size: 11px;
+  }
+  .work-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .home-profile {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-block: 60px;
+  }
+  .profile-photo {
+    width: 80%;
+  }
+  .contact-card {
+    padding: 28px 20px;
+  }
+  .contact-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .contact-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+}

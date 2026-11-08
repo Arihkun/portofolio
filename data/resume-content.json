@@ -1,0 +1,20 @@
+{
+  "profile": "I work in risk development, combining credit-risk modeling with portfolio analysis and reporting automation. I prepare and validate data, compare model results, and turn lending policies into decision rules. I also work with business and IT teams to investigate issues and document the checks behind the results.",
+  "skills": [
+    { "label": "Data & reporting", "items": "Python, SQL, pandas, Polars, DuckDB, Parquet, Excel/VBA, BigQuery" },
+    { "label": "Risk & modeling", "items": "Credit scoring, feature engineering, Logistic Regression, Random Forest, LightGBM, XGBoost, Optuna" },
+    { "label": "Evaluation", "items": "AUC, Gini, KS, threshold analysis, temporal validation, leakage checks, risk segmentation, performance monitoring" },
+    { "label": "Automation & delivery", "items": "GoRules/Zen, FastAPI, reconciliation, reproducible data workflows, n8n, RapidMiner Studio" }
+  ],
+  "experience": [
+    "Prepare and validate credit and portfolio data for risk analysis, recurring reports, and decision-strategy reviews.",
+    "Develop and evaluate credit-scoring models, checking feature availability, generalization, and risk segmentation; document inputs for technical handoff.",
+    "Build portfolio-risk reporting workflows with Polars, Parquet, DuckDB, and Excel/VBA, retaining identifier and mapping traceability.",
+    "Design and test Credit Decision Engine rules, produce monthly scoring and CDE performance reports, and investigate production issues with business and IT teams.",
+    "Develop a repeat-order propensity workflow with agreement-level lineage, temporal validation, and leakage checks. This work remains in development."
+  ],
+  "projects": [
+    { "title": "Portfolio Risk Automation", "description": "Built a staged workflow for reusable analytical feeds, reconciliation, and reporting, with mapping checks and contract-level traceability.", "tools": "Python | Polars | Parquet | DuckDB | Excel/VBA", "href": "/projects/portfolio-risk-automation" },
+    { "title": "Credit Scoring ML", "description": "Prepared and evaluated a credit-risk modeling workflow covering feature availability, model comparison, holdout assessment, segmentation, and technical handoff.", "tools": "Python | XGBoost | LightGBM | scikit-learn | Optuna", "href": "/projects/credit-scoring-ml" }
+  ]
+}

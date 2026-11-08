@@ -1,0 +1,144 @@
+.experience-section {
+  padding-block: 80px;
+  border-top: 1px solid var(--line);
+}
+
+.experience-header {
+  position: relative;
+  z-index: 25;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 36px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.experience-header h2 {
+  font-size: clamp(24px, 3.2vw, 36px);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-top: 8px;
+}
+
+.experience-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.experience-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  padding: 32px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.04);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.experience-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+}
+
+.exp-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.exp-period {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-subtle);
+  font-weight: 500;
+}
+
+.exp-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #09090b;
+  border: 1px solid var(--line);
+}
+
+.exp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exp-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exp-title-row h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.exp-company {
+  font-size: 14px;
+  color: #52525b;
+  font-weight: 500;
+}
+
+.exp-summary {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.exp-points {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.exp-points strong {
+  color: var(--ink);
+}
+
+.exp-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.exp-tech-stack span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+@media (max-width: 820px) {
+  .experience-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 24px 20px;
+  }
+}
