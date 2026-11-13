@@ -152,6 +152,18 @@ const evidenceBySlug: Record<string, ProjectEvidence> = {
     ],
     boundary: "The app is intentionally scoped to two controlled accounts and is not assessed as a public multi-user platform.",
   },
+  "wedding-invitation": {
+    status: "Verified Local",
+    assessmentType: "System assessment",
+    verdict: "Local static export, Pages Functions integration, and D1 schema are verified.",
+    rationale: "The test suite covers token hashing, RSVP idempotency, wishes deduplication, rate limits, and Turnstile integration. Layout is verified across 360px–1440px viewports without horizontal overflow.",
+    items: [
+      { label: "Automated test suite", value: "20 passed", note: "Vitest tests covering token security, RSVP idempotency, and D1 pagination." },
+      { label: "Frontend & Accessibility", value: "Verified", note: "WCAG AAA contrast, keyboard traps, Lenis smooth scrolling, and reduced-motion." },
+      { label: "Edge Functions & DB", value: "Local D1", note: "Cloudflare Pages Functions and atomic D1 SQLite migrations tested locally." },
+    ],
+    boundary: "Local integration tests use synthetic guest data; production publication requires owner credentials and real event content.",
+  },
   spendid: {
     status: "In Development",
     assessmentType: "Workflow assessment",
