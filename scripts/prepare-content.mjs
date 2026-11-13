@@ -5,13 +5,16 @@ import { createElement as h } from "react";
 import { ImageResponse } from "next/og.js";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-for (const name of ["koii", "kasmate"]) {
-  for (const version of [2, 3]) {
-    const file = `public/media/${name}-demo-v${version}.mp4`;
-    const { size } = await stat(path.join(root, file));
-    if (size === 0 || size > 2 * 1024 * 1024) {
-      throw new Error(`${file} must be between 1 byte and 2 MB for the demo range handler.`);
-    }
+for (const file of [
+  "public/media/koii-demo-v2.mp4",
+  "public/media/koii-demo-v3.mp4",
+  "public/media/kasmate-demo-v2.mp4",
+  "public/media/kasmate-demo-v3.mp4",
+  "public/media/undangan-demo.mp4",
+]) {
+  const { size } = await stat(path.join(root, file));
+  if (size === 0 || size > 2 * 1024 * 1024) {
+    throw new Error(`${file} must be between 1 byte and 2 MB for the demo range handler.`);
   }
 }
 const directory = path.join(root, "content/projects");

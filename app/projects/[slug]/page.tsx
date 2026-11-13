@@ -61,7 +61,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </header>
 
-      {["credit-scoring-ml", "cde-gorules", "indonesian-document-ocr", "koii", "kasmate"].includes(project.slug) ? <div className="shell case-visual"><ProjectVisual slug={project.slug} large /></div> : null}
+      {["credit-scoring-ml", "cde-gorules", "indonesian-document-ocr", "koii", "kasmate", "wedding-invitation"].includes(project.slug) ? <div className="shell case-visual"><ProjectVisual slug={project.slug} large /></div> : null}
 
       <div className="shell case-layout">
         <aside className="case-aside" data-reveal="left">

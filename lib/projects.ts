@@ -25,6 +25,7 @@ const projectOrder = [
   "indonesian-document-ocr",
   "koii",
   "kasmate",
+  "wedding-invitation",
   "portfolio-risk-automation",
   "repeat-order-prediction",
   "ktp-ocr",

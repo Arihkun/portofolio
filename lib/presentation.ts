@@ -38,9 +38,16 @@ export const projectPresentation: Record<
     theme: "kasmate",
     techStack: ["React", "TypeScript", "Tailwind CSS", "Privacy Controls", "Local-First"],
   },
+  "wedding-invitation": {
+    title: "Kinar & Oki: Wedding Invitation Platform",
+    summary: "A private digital wedding invitation platform featuring quiet romantic botanical styling, tokenized guest access, and real-time interactive RSVP management on Cloudflare D1 & Pages Functions.",
+    theme: "wedding",
+    techStack: ["Next.js 16", "React 19", "Tailwind CSS v4", "Cloudflare Pages & D1", "Pages Functions", "Motion", "Lenis"],
+  },
 };
 
-export const demoMedia: Record<string, { src: string; poster: string; caption: string }> = {
-  koii: { src: "/media/koii-demo-v3.mp4", poster: "/media/koii-poster-v2.webp", caption: "A local demo of planning and photo memories. Activities are fictional; sample photos are AI-generated." },
-  kasmate: { src: "/media/kasmate-demo-v3.mp4", poster: "/media/kasmate-poster-v2.webp", caption: "A local demo of the dashboard, transactions, and budgets. All amounts are fictional; no account or backend is connected." },
+export const demoMedia: Record<string, { src: string; poster: string; caption: string; autoPlayOnScroll?: boolean }> = {
+  koii: { src: "/media/koii-demo-v3.mp4", poster: "/media/koii-poster-v2.webp", caption: "A local demo of planning and photo memories. Activities are fictional; sample photos are AI-generated.", autoPlayOnScroll: true },
+  kasmate: { src: "/media/kasmate-demo-v3.mp4", poster: "/media/kasmate-poster-v2.webp", caption: "A local demo of the redesigned dashboard, transactions, and budgets. All amounts are fictional; no account or backend is connected.", autoPlayOnScroll: true },
+  "wedding-invitation": { src: "/media/undangan-demo.mp4", poster: "/media/undangan-poster.webp", caption: "A local demo of the wedding invitation experience: opening sequence, couple profile, event schedule, and RSVP interaction.", autoPlayOnScroll: false },
 };

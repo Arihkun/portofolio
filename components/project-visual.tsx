@@ -8,12 +8,18 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
   const media = demoMedia[slug];
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playError, setPlayError] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
   const manuallyPaused = useRef(false);
+
+  const autoPlay = media?.autoPlayOnScroll !== false;
+
   const requestPlay = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
     video.muted = true;
-    void video.play().catch((cause: unknown) => {
+    void video.play().then(() => {
+      setIsPlaying(true);
+    }).catch((cause: unknown) => {
       if (!video.isConnected) return;
       const name = cause instanceof Error ? cause.name : "";
       if (name === "AbortError" || name === "NotAllowedError") return;
@@ -25,7 +31,7 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !autoPlay) return;
 
     video.defaultMuted = true;
     video.muted = true;
@@ -44,13 +50,17 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
       } else {
         if (!video.paused) {
           video.pause();
+          setIsPlaying(false);
         }
       }
     }, { threshold: [0, 0.25] });
 
     const onVisibilityChange = () => {
       if (document.hidden) {
-        if (!video.paused) video.pause();
+        if (!video.paused) {
+          video.pause();
+          setIsPlaying(false);
+        }
       } else if (isVisible && !preference.matches && !manuallyPaused.current) {
         video.muted = true;
         requestPlay();
@@ -59,7 +69,7 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
 
     observer.observe(video);
     document.addEventListener("visibilitychange", onVisibilityChange);
-    const onPreferenceChange = () => { if (preference.matches) video.pause(); };
+    const onPreferenceChange = () => { if (preference.matches) { video.pause(); setIsPlaying(false); } };
     preference.addEventListener("change", onPreferenceChange);
 
     return () => {
@@ -67,7 +77,7 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
       document.removeEventListener("visibilitychange", onVisibilityChange);
       preference.removeEventListener("change", onPreferenceChange);
     };
-  }, [slug, requestPlay]);
+  }, [slug, requestPlay, autoPlay]);
 
   const togglePlayback = () => {
     const video = videoRef.current;
@@ -76,11 +86,22 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
     if (video.paused) {
       setPlayError("");
       if (video.error) video.load();
+      if (!autoPlay) {
+        video.controls = true;
+      }
       requestPlay();
     } else {
       video.pause();
+      setIsPlaying(false);
     }
   };
+
+  const domainMap: Record<string, { domain: string; badge: string; appName: string }> = {
+    koii: { domain: "koii.app/demo", badge: "PREVIEW", appName: "Koii" },
+    kasmate: { domain: "kasmate.app/demo", badge: "DEMO", appName: "KasMate" },
+    "wedding-invitation": { domain: "kinaroki.wedding/invite", badge: "INVITATION", appName: "Wedding Invitation" },
+  };
+  const meta = domainMap[slug] || { domain: "demo.app", badge: "DEMO", appName: "Project" };
 
   if (media) return (
     <figure className={`project-visual project-visual-video video-${slug} ${large ? "project-visual-large" : ""}`}>
@@ -93,9 +114,9 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
           </div>
           <div className="hyperframe-url">
             <span className="hyperframe-lock">🔒</span>
-            <span className="hyperframe-domain">{slug === "koii" ? "koii.app/demo" : "kasmate.app/demo"}</span>
+            <span className="hyperframe-domain">{meta.domain}</span>
           </div>
-          <div className="hyperframe-badge">{slug === "koii" ? "PREVIEW" : "DEMO"}</div>
+          <div className="hyperframe-badge">{meta.badge}</div>
         </div>
         <div className="video-frame">
           <video
@@ -104,16 +125,29 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
             poster={media.poster}
             playsInline
             muted
-            loop
+            loop={autoPlay}
+            controls={!autoPlay && isPlaying}
             preload="metadata"
             disablePictureInPicture
             onClick={togglePlayback}
-            onPlaying={() => setPlayError("")}
+            onPlaying={() => { setPlayError(""); setIsPlaying(true); }}
+            onPause={() => setIsPlaying(false)}
             onError={() => setPlayError("The demo could not load. Tap the video to retry or open it directly.")}
-            aria-label={`${slug === "koii" ? "Koii" : "KasMate"} demo: ${media.caption}`}
+            aria-label={`${meta.appName} demo: ${media.caption}`}
           >
             <a href={media.src}>Open the demo video</a>
           </video>
+          {!autoPlay && !isPlaying && (
+            <button
+              type="button"
+              className="video-play-overlay"
+              onClick={togglePlayback}
+              aria-label="Play demo video"
+            >
+              <span className="play-icon" aria-hidden="true">▶</span>
+              <span className="play-text">Watch Demo</span>
+            </button>
+          )}
         </div>
       </div>
       {playError && <p className="video-error" role="status">{playError} <a href={media.src}>Open video</a></p>}

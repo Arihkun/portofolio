@@ -22,7 +22,7 @@ export function ProjectCard({ project, index, variant = "default" }: ProjectCard
           {project.status}
         </span>
       </div>
-      {project.featured || ["credit-scoring-ml", "cde-gorules", "indonesian-document-ocr", "koii", "kasmate"].includes(project.slug) ? <ProjectVisual slug={project.slug} /> : null}
+      {project.featured || ["credit-scoring-ml", "cde-gorules", "indonesian-document-ocr", "koii", "kasmate", "wedding-invitation"].includes(project.slug) ? <ProjectVisual slug={project.slug} /> : null}
       <div>
         <p className="card-category">{project.category}</p>
         <h3><Link href={`/projects/${project.slug}`}>{project.title}</Link></h3>
