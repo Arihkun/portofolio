@@ -8,7 +8,7 @@ type AssetEnvironment = {
 export default {
   async fetch(request: Request, env: AssetEnvironment, context: unknown) {
     const pathname = new URL(request.url).pathname;
-    if (!/^\/media\/(?:(?:koii|kasmate)-demo-v[23]|undangan-demo)\.mp4$/.test(pathname) || !["GET", "HEAD"].includes(request.method)) {
+    if (!/^\/media\/(?:(?:koii|kasmate)-demo-v[234]|undangan-demo)\.mp4$/.test(pathname) || !["GET", "HEAD"].includes(request.method)) {
       return app.fetch(request, env, context);
     }
 

@@ -97,7 +97,7 @@ export function ProjectVisual({ slug, large = false }: { slug: string; large?: b
   };
 
   const domainMap: Record<string, { domain: string; badge: string; appName: string }> = {
-    koii: { domain: "koii.app/demo", badge: "PREVIEW", appName: "Koii" },
+    koii: { domain: "koii.ai.id/demo", badge: "PREVIEW", appName: "Koii" },
     kasmate: { domain: "kasmate.app/demo", badge: "DEMO", appName: "KasMate" },
     "wedding-invitation": { domain: "kinaroki.wedding/invite", badge: "INVITATION", appName: "Wedding Invitation" },
   };

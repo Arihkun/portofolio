@@ -47,7 +47,7 @@ export const projectPresentation: Record<
 };
 
 export const demoMedia: Record<string, { src: string; poster: string; caption: string; autoPlayOnScroll?: boolean }> = {
-  koii: { src: "/media/koii-demo-v3.mp4", poster: "/media/koii-poster-v2.webp", caption: "A local demo of planning and photo memories. Activities are fictional; sample photos are AI-generated.", autoPlayOnScroll: true },
+  koii: { src: "/media/koii-demo-v4.mp4", poster: "/media/koii-poster-v3.webp", caption: "A local demo of the redesigned home dashboard, memories, notes, and wishlist. Activities are fictional; sample photos are AI-generated.", autoPlayOnScroll: true },
   kasmate: { src: "/media/kasmate-demo-v3.mp4", poster: "/media/kasmate-poster-v2.webp", caption: "A local demo of the redesigned dashboard, transactions, and budgets. All amounts are fictional; no account or backend is connected.", autoPlayOnScroll: true },
   "wedding-invitation": { src: "/media/undangan-demo.mp4", poster: "/media/undangan-poster.webp", caption: "A local demo of the wedding invitation experience: opening sequence, couple profile, event schedule, and RSVP interaction.", autoPlayOnScroll: false },
 };

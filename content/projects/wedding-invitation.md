@@ -9,54 +9,55 @@ featured: false
 
 ## Overview
 
-I built a private, modern digital wedding invitation platform featuring quiet romantic botanical styling, tokenized guest access, and real-time interactive RSVP management. Built with Next.js 16 static export and Cloudflare Pages Functions backed by Cloudflare D1 (serverless SQLite), the platform delivers instant static delivery with secure, serverless guest workflows.
+I built a private digital wedding invitation web application featuring botanical styling, tokenized guest invitations, and real-time RSVP management. It combines a Next.js 16 static export on Cloudflare Pages with serverless Pages Functions backed by Cloudflare D1 (serverless SQLite).
 
 ## Context
 
-Many digital wedding invitations rely on monolithic server hosting, generic low-contrast templates, or client-side storage that leaks guest lists, personal phone numbers, and private messages. This project establishes an enterprise-grade standard for event invitations: static-first edge performance, cryptographic guest token validation, zero personal data in client bundles, and accessible typography with verified contrast.
+Many online invitations rely on heavy templates or insecure client storage that exposes entire guest lists and phone numbers. I wanted a lightweight, secure invitation that loads instantly from the edge, validates guest invitations server-side via token hashes, and protects RSVP and guest wishes from spam.
 
 ## My Role
 
-- Architected the frontend user experience and component design system using Next.js 16, React 19, and Tailwind CSS v4.
-- Designed the editorial botanical theme with high-contrast palette (`Forest #1C2E24`, `Ivory #FDFBF7`, `Gold #C5A059`) adhering strictly to WCAG AAA readability standards.
-- Built split sticky-portrait desktop composition paired with full-width responsive mobile layouts.
-- Integrated Cloudflare Pages Functions and Cloudflare D1 for serverless, atomic guest RSVP updates and rate-limited public wishes.
-- Implemented SHA-256 token hashing and Cloudflare Turnstile anti-bot gates for form submissions.
-- Engineered smooth scrolling with Lenis, interactive dialogs, keyboard navigation, and motion accessibility (`prefers-reduced-motion`).
+- Built the full-stack web application using Next.js 16, React 19, and Tailwind CSS v4.
+- Implemented responsive mobile and desktop layouts with smooth scrolling (Lenis) and enter animations (Motion).
+- Developed interactive components including the opening gate envelope, live countdown timer, couple profiles, and photo gallery.
+- Integrated Cloudflare Pages Functions and Cloudflare D1 for atomic RSVP submissions and guest wishes.
+- Implemented URL-based guest token verification so invitees see their own names and permitted guest count securely.
+- Configured Cloudflare Turnstile anti-bot verification to prevent spam on public submission endpoints.
+- Tested form validation, edge API error handling, and cross-browser responsiveness.
 
 ## Approach
 
-The system enforces strict architectural separation:
-1. **Static Presentation Layer**: The core invitation—hero couple section, couple profiles, love story timeline, event details, and photo gallery—builds to a purely static export served globally from Cloudflare edge locations with near-zero latency.
-2. **Tokenized Guest Authentication**: Unique invitation URLs provide a guest token hash. The server validates the token against D1, retrieving guest names and maximum permitted party size without exposing raw guest tables or contact records.
-3. **Atomic RSVP & Public Wishes**: Guests submit attendance confirmation and personal wishes through Pages Functions. Rate limiting and atomic SQL transactions guarantee duplicate submission prevention and tamper resistance.
-4. **Epistemic Honesty**: Where real-world venue pins, bank accounts, or licensed music are pending, the UI presents clean, structured fallback states rather than displaying fake placeholders.
+The application separates static content from private guest workflows:
+1. **Static Presentation**: Core invitation sections—hero couple view, event schedule, story timeline, and photo gallery—are pre-rendered as static HTML and served globally via Cloudflare Pages edge network.
+2. **Tokenized Guest Access**: Each invited guest receives a personalized link with a unique token. Pages Functions validate the token against Cloudflare D1, returning the guest's name and allocated party seats without exposing the underlying guest database.
+3. **Atomic RSVP & Wishes**: When guests submit their attendance or leave a message, the serverless API updates D1 atomically with idempotency and rate limiting.
+4. **Form Protection**: Submissions are guarded by Cloudflare Turnstile, ensuring automated bots cannot spam guest wishes or alter RSVPs.
 
 ## Architecture
 
 ```text
 Next.js 16 Static Export
   -> Static HTML/CSS/Images on Cloudflare Pages Edge
-  -> Lenis Smooth Scroll & Responsive Editorial Layout
-  -> URL Token Hash Validation
+  -> Lenis Smooth Scroll & Responsive Mobile Layout
+  -> URL Invitation Token Validation
   -> Cloudflare Pages Functions (/api/rsvp, /api/wishes)
   -> Cloudflare D1 (Private Serverless SQLite DB)
-  -> Rate Limiting & Cloudflare Turnstile Anti-Bot Check
+  -> Cloudflare Turnstile Anti-Bot Verification
 ```
 
 ## Validation and Evidence
 
-The project includes unit and integration test suites in Vitest covering token hashing, guest count bounds, idempotency of RSVP updates, wishes deduplication, and timezone offset handling. Cross-device manual and automated browser testing verified zero horizontal overflow across mobile (360px–430px) and desktop (768px–1440px) viewports, complete focus trap restoration in image lightboxes, and offline resilience.
+The project includes Vitest automated tests verifying token hashing, RSVP status transitions, wishes deduplication, and database migrations. Manual and browser checks confirmed smooth rendering across mobile viewports (360px–430px) and desktop screens without horizontal overflow.
 
 ## Results
 
-The invitation achieves optimal Lighthouse performance scores (100 SEO, 100 Best Practices) with minimal bundle weight. The tokenized guest workflow guarantees that only designated invitees can RSVP or post wishes, while public viewers receive an elegant static reading experience.
+The invitation achieves optimal Lighthouse scores (100 SEO, 100 Best Practices) with minimal bundle weight. Invited guests can easily RSVP and share wishes on mobile devices, while event organizers have a centralized, secure SQLite database of guest responses.
 
 ## Limitations
 
-- RSVP and wishes submission require an authorized invitation token.
-- Video and live audio playback respect user gesture constraints and device audio policies.
-- Production publication gates on client-provided finalized event details and custom domain DNS.
+- RSVP and wishes submissions require a valid invitation token.
+- Background music playback requires an initial user interaction to comply with browser audio autoplay policies.
+- Production publication requires finalizing event dates, venue coordinates, and custom domain DNS.
 
 ## Technology Stack
 
@@ -69,4 +70,4 @@ The complete invitation frontend, database migrations, and Cloudflare Pages Func
 
 ## Privacy and Publication Note
 
-Sample photos and event dates in public demonstrations use synthetic placeholders. Guest identity lists and production configuration variables remain strictly private.
+Sample names and mock event dates are used for portfolio demonstration. Real guest contact details are never committed or published.
